@@ -43,19 +43,16 @@
 #### Model configを更新
 ```$ python update_config.py```  
 
-#### Modelを学習
-```$ cd Tensorflow/models/```    
+#### Modelを学習 
 ```$ export PYTHONPATH=$PYTHONPATH:$/Tensorflow/models/```  
-```$ cd ..```  
-```$ cd ..```  
 ```$ python Tensorflow/models/research/object_detection/model_main_tf2.py --model_dir=Tensorflow/workspace/models/my_ssd_mobnet --pipeline_config_path=Tensorflow/workspace/models/my_ssd_mobnet/pipeline.config --num_train_steps=5000```  
 
 ## 検証結果
-<img src="Tensorflow/workspace/images/result/nikyo_14.jpg" width="49%">
-<img src="Tensorflow/workspace/images/result/nikyo_15.jpg" width="49%">
+<img src="Tensorflow/workspace/images/result/nikyo_14.jpg" width="100%">
+<!-- <img src="Tensorflow/workspace/images/result/nikyo_15.jpg" width="40%"> -->
 
-<img src="Tensorflow/workspace/images/result/sankyo_14.jpg" width="49%">
-<img src="Tensorflow/workspace/images/result/sankyo_15.jpg" width="49%">
+<img src="Tensorflow/workspace/images/result/sankyo_14.jpg" width="100%">
+<!-- <img src="Tensorflow/workspace/images/result/sankyo_15.jpg" width="40%"> -->
 
 
 ## 参考文献
