@@ -8,12 +8,12 @@
 
 ## 合気道の関節技
 合気道には多数の上肢立関節技があり、代表的な技である「小手返し」では相手の手首を回外・掌屈、肘を屈曲、肩を外旋させることで相手を投げる[1]。
-他にも、手首を掌屈・回外、肘を屈曲、肩を外転・外旋させる「四方投」や、手首を回内・背屈、肘を屈曲、肩を外転・内旋させる「三教」などの技がある(図は[1]より引用)。
+他にも、手首を回内・掌屈、肘を屈曲、肩を外転・内旋させる「三教」や手首を回内・背屈、肘を屈曲、肩を外転・内旋させる「三教」などの技がある(図は[1]より引用)。
 
 <img src="other_pic/enatsu_2022/table_1.png" width="50%">
 
-<img src="other_pic/enatsu_2022/shihonage.png" width="25%">
-<img src="other_pic/enatsu_2022/shihonage_joint.png" width="25%">
+<img src="other_pic/enatsu_2022/nikyo.png" width="25%">
+<img src="other_pic/enatsu_2022/nikyo_joint.png" width="25%">
 
 <img src="other_pic/enatsu_2022/sankyo.png" width="25%">
 <img src="other_pic/enatsu_2022/sankyo_joint.png" width="25%">
@@ -48,6 +48,7 @@
 ```$ python Tensorflow/models/research/object_detection/model_main_tf2.py --model_dir=Tensorflow/workspace/models/my_ssd_mobnet --pipeline_config_path=Tensorflow/workspace/models/my_ssd_mobnet/pipeline.config --num_train_steps=5000```  
 
 ## 検証結果
+
 <img src="Tensorflow/workspace/images/result/nikyo_14.jpg" width="100%">
 <!-- <img src="Tensorflow/workspace/images/result/nikyo_15.jpg" width="40%"> -->
 
@@ -56,4 +57,7 @@
 
 
 ## 参考文献
-[1]江夏怜. (2022). 日本武術の上肢立関節技における関節運動方向による分類. 武道学研究, 54(2), 141-148.
+[1][江夏怜. (2022). 日本武術の上肢立関節技における関節運動方向による分類. 武道学研究, 54(2), 141-148.](https://www.jstage.jst.go.jp/article/budo/54/2/54_2113/_article/-char/ja)
+
+## 機械学習の参考にした教材
+- [Nicholas Renotte, Tensorflow Object Detection in 5 Hours with Python | Full Course with 3 Projects](https://www.youtube.com/watch?v=yqkISICHH-U&t=1461s)
