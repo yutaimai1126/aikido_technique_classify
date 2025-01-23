@@ -1,0 +1,8 @@
+item { 
+	name:'nikyo'
+	id:1
+}
+item { 
+	name:'sankyo'
+	id:2
+}

@@ -1,0 +1,26 @@
+<annotation>
+	<folder>nikyo</folder>
+	<filename>nikyo_02.jpg</filename>
+	<path>/mnt/nfs/hera/imai1126/website/aikido_ML/Tensorflow/workspace/images/collectedimages/nikyo/nikyo_02.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4032</width>
+		<height>3024</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>nikyo</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1580</xmin>
+			<ymin>955</ymin>
+			<xmax>2508</xmax>
+			<ymax>1493</ymax>
+		</bndbox>
+	</object>
+</annotation>
