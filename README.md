@@ -22,7 +22,16 @@
 合気道の技には、上肢立関節技だけでなく、相手の攻撃を受け流しながら相手の重心を崩して投げる技もある。代表的な技に「呼吸投げ」とよばれる、相手の攻撃のタイミングと力の向きに合わせて相手を投げる技がある。
 
 ## データの収集とモデル作成
-### 演武の動画から、技が決まる瞬間の画像を取得する。  
+### 仮想環境を作る
+```$ python -m venv .venv```   
+```$ venv .venv/bin/activate```   
+
+### ラベリングツールとTensorflow Object Detection APIをgitclone
+```$ cd Tensorflow```  
+```$ git clone https://github.com/HumanSignal/labelImg.git```  
+```$ git clone https://github.com/tensorflow/models.git```  
+
+### 演武の動画から、技が決まる瞬間の画像を取得する。
 ```$ pip install -r Tensorflow/labelImg/requirements/requirements-linux-python3.txt```  
 ```$ python Tensorflow/labelImg/labelImg.py```
 
