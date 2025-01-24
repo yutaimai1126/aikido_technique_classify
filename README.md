@@ -22,39 +22,108 @@
 合気道の技には、上肢立関節技だけでなく、相手の攻撃を受け流しながら相手の重心を崩して投げる技もある。代表的な技に「呼吸投げ」とよばれる、相手の攻撃のタイミングと力の向きに合わせて相手を投げる技がある。
 
 ## データの収集とモデル作成
-### 仮想環境を作る
-```$ python -m venv .venv```   
-```$ venv .venv/bin/activate```   
+### 環境構築
+#### venvで仮想環境をつくる
+```shell
+$ python -m venv .venv
+$ venv .venv/bin/activate
+```   
+#### ラベリングツールとTensorflow Object Detection APIをgitclone
+```shell
+$ cd Tensorflow  
+$ git clone https://github.com/HumanSignal/labelImg.git
+$ git clone https://github.com/tensorflow/models.git
+$ cd ..
+```  
+#### Tensorflowのバージョンを指定する
+```Tensorflow/models/offical/pip_package/setup.py```の23,24行目
+```python
+version = '2.13.1'
+tf_version = '2.13.1'
+```
 
-### ラベリングツールとTensorflow Object Detection APIをgitclone
-```$ cd Tensorflow```  
-```$ git clone https://github.com/HumanSignal/labelImg.git```  
-```$ git clone https://github.com/tensorflow/models.git```  
+#### 依存関係をインストール
+##### labelImgの依存関係
+```shell
+$ pip install -r Tensorflow/labelImg/requirements/requirements-linux-python3.txt
+$ pyrcc5 -o Tensorflow/labelImg/resources.py Tensorflow/labelImg/resources.qrc
+$ mv Tensorflow/labelImg/resources.py Tensorflow/labelImg/resources.qrc Tensorflow/labelImg/libs/
+```
+```Tensorflow/labelImg/resources.py```168,179,213行目を修正
+```python
+# 168行目のif Qt.RightButton & ev.buttons():を修正:
+if ev.buttons() & Qt.RightButton == Qt.RightButton:
+# 179行目のif Qt.LeftButton & ev.buttons():を修正
+if ev.buttons() & Qt.LeftButton == Qt.LeftButton:
+# 213行目のself.dock.setFeatures(self.dock.features() ^ self.dock_features)を修正
+self.dock.setFeatures(self.dock_features)
+```
+##### Tensorflowの依存関係
+```shell
+$ python Tensorflow/models/official/pip_package/setup.py install
+```
 
-### 演武の動画から、技が決まる瞬間の画像を取得する。
-```$ pip install -r Tensorflow/labelImg/requirements/requirements-linux-python3.txt```  
-```$ python Tensorflow/labelImg/labelImg.py```
+### ラベリング
+```shell
+$ python Tensorflow/labelImg/labelImg.py
+```
+実行後、labelImgのウィンドウが開く
+<img src="other_pic/labelImg/labelImg_home.png" width="100%">
 
-### 技が決まる瞬間の姿勢に技の種類のラベルを付け、トレーニング用とテスト用に振り分ける。
-### Tensorflow Object Detection APIを用いて、物体検知モデルを作成する。
+「ディレクトリを開く」と「保存先を変更する」で画像を保存しているフォルダを選択
+<img src="other_pic/labelImg/labelImg_serect_dir.png" width="100%">
+
+"w"を押して範囲選択モードに切り替え、ラベルづけしたい範囲を選択
+<img src="other_pic/labelImg/labelImg_labeling.png" width="100%">
+
+ラベル名を入力する
+<img src="other_pic/labelImg/labelImg_naming.png" width="100%">
+
+ラベリング後、画像を保存していたフォルダに```.xml```ファイルが作成されている。  
+```Tensorflow/workspace/Images```内に、トレーニングデータ用とテスト用のディレクトリを作成し、画像と```.xml```ファイルのセットを振り分ける。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #### Labelmapを作成
-```$ python create_label.py```  
+```shell
+$ python create_label.py
+```  
 
 #### TFrecordを作成
-```$ python Tensorflow/scripts/generate_tfrecord.py -x Tensorflow/workspace/images/train -l Tensorflow/workspace/annotations/label_map.pbtxt -o Tensorflow/workspace/annotations/train.record```  
-```$ python Tensorflow/scripts/generate_tfrecord.py -x Tensorflow/workspace/images/test -l Tensorflow/workspace/annotations/label_map.pbtxt -o Tensorflow/workspace/annotations/test.record```
+```shell
+$ python Tensorflow/scripts/generate_tfrecord.py -x Tensorflow/workspace/images/train -l Tensorflow/workspace/annotations/label_map.pbtxt -o Tensorflow/workspace/annotations/train.record
+$ python Tensorflow/scripts/generate_tfrecord.py -x Tensorflow/workspace/images/test -l Tensorflow/workspace/annotations/label_map.pbtxt -o Tensorflow/workspace/annotations/test.record
+```
 
 #### Model configを作成
-```$ mkdir Tensorflow\workspace\modelsmy_ssd_mobnet```  
-```$ cp Tensorflow/workspace/pre-trained-models/ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8/pipeline.config Tensorflow/workspace/models/my_ssd_mobnet```
+```shell
+$ mkdir Tensorflow\workspace\modelsmy_ssd_mobnet
+$ cp Tensorflow/workspace/pre-trained-models/ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8/pipeline.config Tensorflow/workspace/models/my_ssd_mobnet
+```
 
 #### Model configを更新
-```$ python update_config.py```  
+```shell
+$ python update_config.py
+```  
 
 #### Modelを学習 
-```$ export PYTHONPATH=$PYTHONPATH:$/Tensorflow/models/```  
-```$ python Tensorflow/models/research/object_detection/model_main_tf2.py --model_dir=Tensorflow/workspace/models/my_ssd_mobnet --pipeline_config_path=Tensorflow/workspace/models/my_ssd_mobnet/pipeline.config --num_train_steps=5000```  
+```shell
+$ export PYTHONPATH=$PYTHONPATH:$/Tensorflow/models/
+$ python Tensorflow/models/research/object_detection/model_main_tf2.py --model_dir=Tensorflow/workspace/models/my_ssd_mobnet --pipeline_config_path=Tensorflow/workspace/models/my_ssd_mobnet/pipeline.config --num_train_steps=5000
+```  
 
 ## 検証結果
 

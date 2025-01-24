@@ -1,0 +1,6 @@
+README.md
+tf_models_official.egg-info/PKG-INFO
+tf_models_official.egg-info/SOURCES.txt
+tf_models_official.egg-info/dependency_links.txt
+tf_models_official.egg-info/requires.txt
+tf_models_official.egg-info/top_level.txt
